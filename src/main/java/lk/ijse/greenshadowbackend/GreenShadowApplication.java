@@ -8,8 +8,6 @@ public class GreenShadowApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GreenShadowApplication.class, args);
-
-		System.out.println("hello spring");
 	}
 
 
