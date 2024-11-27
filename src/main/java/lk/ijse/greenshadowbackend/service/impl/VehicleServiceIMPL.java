@@ -11,6 +11,7 @@ import lk.ijse.greenshadowbackend.util.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,12 +20,13 @@ public class VehicleServiceIMPL implements VehicleService {
     private VehicleDao vehicleDao;
     @Autowired
     private Mapping mapping;
+
     @Override
     public void saveVehicle(VehicleDTO vehicleDTO) {
         vehicleDTO.setVehicleCode(AppUtil.createVehicleCode());
         var vehicleEntity = mapping.convertToVehicleEntity(vehicleDTO);
         var savedVehicle = vehicleDao.save(vehicleEntity);
-        if (savedVehicle == null){
+        if (savedVehicle == null) {
             throw new DataPersistFailedException("Cannot save vehicle");
         }
     }
@@ -32,10 +34,16 @@ public class VehicleServiceIMPL implements VehicleService {
     @Override
     public void deleteVehicle(String vehicleCode) {
         Optional<VehicleEntity> findId = vehicleDao.findById(vehicleCode);
-        if (!findId.isPresent()){
+        if (!findId.isPresent()) {
             throw new VehicleNotFound("Vehicle not Found");
-        }else {
+        } else {
             vehicleDao.deleteById(vehicleCode);
         }
+    }
+
+    @Override
+    public List<VehicleDTO> getAllVehicles() {
+        List<VehicleEntity> getAllVehicles = vehicleDao.findAll();
+        return mapping.convertVehicleToDTOList(getAllVehicles);
     }
 }
