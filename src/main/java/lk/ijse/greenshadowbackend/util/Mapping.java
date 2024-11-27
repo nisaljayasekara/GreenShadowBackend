@@ -1,6 +1,8 @@
 package lk.ijse.greenshadowbackend.util;
 
+import lk.ijse.greenshadowbackend.dto.impl.EquipmentDTO;
 import lk.ijse.greenshadowbackend.dto.impl.VehicleDTO;
+import lk.ijse.greenshadowbackend.entity.EquipmentEntity;
 import lk.ijse.greenshadowbackend.entity.VehicleEntity;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -24,5 +26,13 @@ public class Mapping {
     }
     public List<VehicleDTO> convertVehicleToDTOList(List<VehicleEntity> vehicles){
         return modelMapper.map(vehicles, new TypeToken<List<VehicleDTO>>(){}.getType());
+    }
+
+   //vehicle equimpent
+
+    public EquipmentDTO convertToEquipmentDTO(EquipmentEntity equipment){return modelMapper.map(equipment, EquipmentDTO.class);}
+    public EquipmentEntity convertToEquipmentEntity(EquipmentDTO dto){return modelMapper.map(dto, EquipmentEntity.class);}
+    public List<EquipmentDTO> convertEquipmentToDTOList(List<EquipmentEntity> equipment){
+        return modelMapper.map(equipment, new TypeToken<List<EquipmentDTO>>(){}.getType());
     }
 }
