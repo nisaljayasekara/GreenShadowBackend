@@ -55,7 +55,18 @@ public class VehicleController {
     public VehicleResponse getSelectedVehicle(@PathVariable("vehicleCode") String vehicleCode) {
         return vehicleService.getSelectedVehicle(vehicleCode);
     }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PatchMapping(value = "/{vehicleCode}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> updateVehicle(@PathVariable("vehicleCode") String vehicleCode,  @RequestBody VehicleDTO vehicle) {
+        try {
+            vehicleService.updateVehicle(vehicleCode, vehicle);
 
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (VehicleNotFound e) {
+
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
 
 }

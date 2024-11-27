@@ -59,4 +59,23 @@ public class VehicleServiceIMPL implements VehicleService {
         }
     }
 
+    @Override
+    public void updateVehicle(String vehicleCode, VehicleDTO incomevehicleDTO) {
+        Optional<VehicleEntity> tmpVehicleEntity = vehicleDao.findById(vehicleCode);
+
+        if (!tmpVehicleEntity.isPresent()) {
+            throw new VehicleNotFound("Vehicle not found");
+        } else {
+            VehicleEntity vehicleEntity = tmpVehicleEntity.get();
+
+            vehicleEntity.setVehicleCategory(incomevehicleDTO.getVehicleCategory());
+            vehicleEntity.setFuelType(incomevehicleDTO.getFuelType());
+            vehicleEntity.setLicensePlateNumber(incomevehicleDTO.getLicensePlateNumber());
+            vehicleEntity.setStatus(incomevehicleDTO.getStatus());
+            vehicleEntity.setRemarks(incomevehicleDTO.getRemarks());
+
+            vehicleDao.save(vehicleEntity);
+        }
+    }
+
 }
