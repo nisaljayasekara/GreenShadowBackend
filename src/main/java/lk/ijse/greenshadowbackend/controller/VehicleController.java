@@ -1,5 +1,6 @@
 package lk.ijse.greenshadowbackend.controller;
 
+import lk.ijse.greenshadowbackend.customObj.VehicleResponse;
 import lk.ijse.greenshadowbackend.dto.impl.VehicleDTO;
 import lk.ijse.greenshadowbackend.exceptions.DataPersistFailedException;
 import lk.ijse.greenshadowbackend.exceptions.VehicleNotFound;
@@ -49,6 +50,12 @@ public class VehicleController {
     public List<VehicleDTO> getAllVehicles() {
         return vehicleService.getAllVehicles();
     }
+
+    @GetMapping(value = "/{vehicleCode}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public VehicleResponse getSelectedVehicle(@PathVariable("vehicleCode") String vehicleCode) {
+        return vehicleService.getSelectedVehicle(vehicleCode);
+    }
+
 
 
 }

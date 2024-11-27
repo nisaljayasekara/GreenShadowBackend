@@ -1,5 +1,7 @@
 package lk.ijse.greenshadowbackend.service.impl;
 
+import lk.ijse.greenshadowbackend.customObj.VehicleResponse;
+import lk.ijse.greenshadowbackend.customObj.impl.VehicleErrorResponse;
 import lk.ijse.greenshadowbackend.dao.VehicleDao;
 import lk.ijse.greenshadowbackend.dto.impl.VehicleDTO;
 import lk.ijse.greenshadowbackend.entity.VehicleEntity;
@@ -46,4 +48,15 @@ public class VehicleServiceIMPL implements VehicleService {
         List<VehicleEntity> getAllVehicles = vehicleDao.findAll();
         return mapping.convertVehicleToDTOList(getAllVehicles);
     }
+
+    @Override
+    public VehicleResponse getSelectedVehicle(String vehicleCode) {
+        if (vehicleDao.existsById(vehicleCode)){
+            VehicleEntity vehicleEntityByVehicleCode = vehicleDao.getReferenceById(vehicleCode);
+            return (VehicleResponse) mapping.convertToVehicleDTO(vehicleEntityByVehicleCode);
+        }else {
+            return new VehicleErrorResponse(0,"Vehicle not Found");
+        }
+    }
+
 }
