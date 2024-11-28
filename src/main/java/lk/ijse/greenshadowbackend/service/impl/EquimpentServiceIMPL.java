@@ -1,5 +1,7 @@
 package lk.ijse.greenshadowbackend.service.impl;
 
+import lk.ijse.greenshadowbackend.customObj.EquipmentResponse;
+import lk.ijse.greenshadowbackend.customObj.impl.EquipmentErrorResponse;
 import lk.ijse.greenshadowbackend.dao.EquipmentDao;
 import lk.ijse.greenshadowbackend.dto.impl.EquipmentDTO;
 import lk.ijse.greenshadowbackend.entity.EquipmentEntity;
@@ -51,4 +53,15 @@ public class EquimpentServiceIMPL implements EquipmentService {
             equipmentDao.deleteById(equipmentId);
         }
     }
+
+    @Override
+    public EquipmentResponse getSelectedEquipment(String equipmentId) {
+        if (equipmentDao.existsById(equipmentId)) {
+            EquipmentEntity equipmentEntityByEquipmentId = equipmentDao.getReferenceById(equipmentId);
+            return mapping.convertToEquipmentDTO(equipmentEntityByEquipmentId);
+        } else {
+            return new EquipmentErrorResponse(0, "Equipment not Found");
+        }
+    }
+
 }
