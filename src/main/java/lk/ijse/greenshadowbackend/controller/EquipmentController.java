@@ -3,6 +3,7 @@ package lk.ijse.greenshadowbackend.controller;
 
 import lk.ijse.greenshadowbackend.dto.impl.EquipmentDTO;
 import lk.ijse.greenshadowbackend.exceptions.DataPersistFailedException;
+import lk.ijse.greenshadowbackend.exceptions.EquipmentNotFound;
 import lk.ijse.greenshadowbackend.service.EquipmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,20 @@ public class EquipmentController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<EquipmentDTO> getAllEquipments(){
         return equipmentService.getAllEquipments();
+    }
+
+    @DeleteMapping(value = "/{equipmentId}")
+    public ResponseEntity<Void> deleteEquipment(@PathVariable("equipmentId") String equipmentId){
+        try{
+            equipmentService.deleteEquipment(equipmentId);
+
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }catch (EquipmentNotFound e){
+
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }catch (Exception e){
+
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

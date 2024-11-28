@@ -9,4 +9,7 @@ public interface EquipmentService {
 
     List<EquipmentDTO> getAllEquipments();
 
+    void deleteEquipment(String equipmentId);
+
+
 }
