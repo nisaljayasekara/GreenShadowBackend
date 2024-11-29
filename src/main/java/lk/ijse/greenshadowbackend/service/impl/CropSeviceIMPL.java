@@ -62,6 +62,14 @@ public class CropSeviceIMPL implements CropService {
             cropDao.save(cropEntity);
         }
     }
-
+    @Override
+    public void deleteCrop(String cropCode) {
+        Optional<CropEntity> findId = cropDao.findById(cropCode);
+        if (!findId.isPresent()){
+            throw new CropNotFound("Crop not Found");
+        }else {
+            cropDao.deleteById(cropCode);
+        }
+    }
 
 }
