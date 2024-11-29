@@ -1,15 +1,18 @@
 package lk.ijse.greenshadowbackend.util;
 
+import lk.ijse.greenshadowbackend.dto.impl.CropDTO;
+import lk.ijse.greenshadowbackend.dto.impl.CropDetailsDTO;
 import lk.ijse.greenshadowbackend.dto.impl.EquipmentDTO;
 import lk.ijse.greenshadowbackend.dto.impl.VehicleDTO;
-import lk.ijse.greenshadowbackend.entity.EquipmentEntity;
-import lk.ijse.greenshadowbackend.entity.VehicleEntity;
+import lk.ijse.greenshadowbackend.entity.*;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class Mapping {
@@ -35,4 +38,13 @@ public class Mapping {
     public List<EquipmentDTO> convertEquipmentToDTOList(List<EquipmentEntity> equipment){
         return modelMapper.map(equipment, new TypeToken<List<EquipmentDTO>>(){}.getType());
     }
+
+    public CropDTO convertToCropDTO(CropEntity crop){return modelMapper.map(crop, CropDTO.class);}
+    public CropEntity convertToCropEntity(CropDTO dto){return modelMapper.map(dto, CropEntity.class);}
+    public List<CropDTO> convertCropToDTOList(List<CropEntity> crop){
+        return modelMapper.map(crop, new TypeToken<List<CropDTO>>(){}.getType());
+    }
+
+
+
 }
