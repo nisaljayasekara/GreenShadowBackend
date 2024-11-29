@@ -62,6 +62,7 @@ public class CropSeviceIMPL implements CropService {
             cropDao.save(cropEntity);
         }
     }
+
     @Override
     public void deleteCrop(String cropCode) {
         Optional<CropEntity> findId = cropDao.findById(cropCode);
@@ -71,5 +72,4 @@ public class CropSeviceIMPL implements CropService {
             cropDao.deleteById(cropCode);
         }
     }
-
 }
