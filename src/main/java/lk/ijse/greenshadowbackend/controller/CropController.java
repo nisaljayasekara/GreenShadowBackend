@@ -1,5 +1,6 @@
 package lk.ijse.greenshadowbackend.controller;
 
+import lk.ijse.greenshadowbackend.customObj.CropResponse;
 import lk.ijse.greenshadowbackend.dto.impl.CropDTO;
 import lk.ijse.greenshadowbackend.exceptions.CropNotFound;
 import lk.ijse.greenshadowbackend.service.CropService;
@@ -60,12 +61,12 @@ public class CropController {
     public List<CropDTO> getAllCrops(){
         return cropService.getAllCrops();
     }
-//
-//    @GetMapping(value = "/{cropCode}", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public CropResponse getSelectedCrop(@PathVariable("cropCode") String cropCode){
-//        return cropService.getSelectedCrop(cropCode);
-//    }
-//
+
+    @GetMapping(value = "/{cropCode}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public CropResponse getSelectedCrop(@PathVariable("cropCode") String cropCode){
+        return cropService.getSelectedCrop(cropCode);
+    }
+
 //    @PatchMapping(value = "/{cropCode}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 //    public ResponseEntity<Void> updateCrop(
 //            @PathVariable("cropCode") String cropCode,
@@ -110,13 +111,13 @@ public class CropController {
 //    public ResponseEntity<Void> deleteCrop(@PathVariable("cropCode") String cropCode){
 //        try{
 //            cropService.deleteCrop(cropCode);
-//            logger.info("Crop deleted :" + cropCode);
+//
 //            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 //        }catch (CropNotFound e){
-//            logger.error(e.getMessage());
+//
 //            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 //        }catch (Exception e){
-//            logger.error(e.getMessage());
+//
 //            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 //        }
 //    }
