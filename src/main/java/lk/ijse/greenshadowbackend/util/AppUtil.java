@@ -12,7 +12,7 @@ public class AppUtil {
 
     private static int cropCounter = 0;
 
-    private static int logCounter = 0;
+    private static int staffCounter = 0;
 
     public static synchronized String createVehicleCode(){
         vehicleCounter++;
@@ -31,6 +31,10 @@ public class AppUtil {
             return null;
         }
         return Base64.getEncoder().encodeToString(cropImage.getBytes());
+    }
+    public static synchronized String createStaffId(){
+        staffCounter++;
+        return String.format("S%04d", staffCounter);
     }
 
 }
