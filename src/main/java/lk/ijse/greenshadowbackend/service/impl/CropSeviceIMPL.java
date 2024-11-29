@@ -9,6 +9,8 @@ import lk.ijse.greenshadowbackend.util.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CropSeviceIMPL implements CropService {
 
@@ -25,4 +27,11 @@ public class CropSeviceIMPL implements CropService {
 
         cropDao.save(cropEntity);
     }
+    @Override
+    public List<CropDTO> getAllCrops() {
+        List<CropEntity> getAllCrops = cropDao.findAll();
+        return mapping.convertCropToDTOList(getAllCrops);
+    }
+
+
 }

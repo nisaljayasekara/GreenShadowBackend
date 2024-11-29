@@ -55,11 +55,11 @@ public class CropController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-//
-//    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-//    public List<CropDTO> getAllCrops(){
-//        return cropService.getAllCrops();
-//    }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<CropDTO> getAllCrops(){
+        return cropService.getAllCrops();
+    }
 //
 //    @GetMapping(value = "/{cropCode}", produces = MediaType.APPLICATION_JSON_VALUE)
 //    public CropResponse getSelectedCrop(@PathVariable("cropCode") String cropCode){
@@ -95,13 +95,13 @@ public class CropController {
 //            }
 //
 //            cropService.updateCrop(updateCropDTO);
-//            logger.info("Crop Updated :" + updateCropDTO);
+//
 //            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 //        } catch (CropNotFound e) {
-//            logger.error(e.getMessage());
+//
 //            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 //        } catch (Exception e) {
-//            logger.error(e.getMessage());
+//
 //            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 //        }
 //    }
