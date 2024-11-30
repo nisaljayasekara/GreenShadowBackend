@@ -1,6 +1,7 @@
 package lk.ijse.greenshadowbackend.controller;
 
 
+import lk.ijse.greenshadowbackend.customObj.FieldResponse;
 import lk.ijse.greenshadowbackend.dto.impl.FieldDTO;
 import lk.ijse.greenshadowbackend.exceptions.FieldNotFound;
 import lk.ijse.greenshadowbackend.service.FieldService;
@@ -21,7 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping()
+@RequestMapping("api/v1/field")
 @RequiredArgsConstructor
 public class FieldController {
     @Autowired
@@ -67,6 +68,14 @@ public class FieldController {
     public List<FieldDTO> getAllFields(){
         return fieldService.getAllFields();
     }
+    @GetMapping(value = "/{fieldCode}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public FieldResponse getSelectedField(@PathVariable("fieldCode") String fieldCode){
+        return fieldService.getSelectedField(fieldCode);
+    }
+
+
+
+
 
 
 }
