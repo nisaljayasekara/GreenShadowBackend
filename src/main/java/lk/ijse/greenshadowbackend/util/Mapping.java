@@ -66,6 +66,12 @@ public class Mapping {
     public List<FieldDTO> convertFieldToDTOList(List<FieldEntity> fieldEntities) {
         return modelMapper.map(fieldEntities, new TypeToken<List<FieldDTO>>(){}.getType());
     }
+    //User and DTO
+    public UserDTO convertToUserDTO(UserEntity user){return modelMapper.map(user, UserDTO.class);}
+    public UserEntity convertToUserEntity(UserDTO dto){return modelMapper.map(dto, UserEntity.class);}
+    public List<UserDTO> convertUserToDTOList(List<UserEntity> user){
+        return modelMapper.map(user, new TypeToken<List<UserDTO>>(){}.getType());
+    }
 
 
 

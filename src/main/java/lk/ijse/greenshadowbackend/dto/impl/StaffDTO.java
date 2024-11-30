@@ -1,6 +1,8 @@
 package lk.ijse.greenshadowbackend.dto.impl;
 
 
+import lk.ijse.greenshadowbackend.customObj.StaffResponse;
+import lk.ijse.greenshadowbackend.dto.SuperDTO;
 import lk.ijse.greenshadowbackend.enums.Designation;
 import lk.ijse.greenshadowbackend.enums.Gender;
 import lk.ijse.greenshadowbackend.enums.Role;
@@ -13,7 +15,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class StaffDTO {
+public class StaffDTO implements SuperDTO, StaffResponse {
     private String staffId;
     private String firstName;
     private String lastName;
