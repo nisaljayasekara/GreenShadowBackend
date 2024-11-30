@@ -1,5 +1,6 @@
 package lk.ijse.greenshadowbackend.controller;
 
+import lk.ijse.greenshadowbackend.customObj.StaffResponse;
 import lk.ijse.greenshadowbackend.dto.impl.StaffDTO;
 import lk.ijse.greenshadowbackend.exceptions.DataPersistFailedException;
 import lk.ijse.greenshadowbackend.service.StaffService;
@@ -41,5 +42,10 @@ public class StaffController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<StaffDTO> getAllStaffs(){
         return staffService.getAllStaffs();
+    }
+    @GetMapping(value = "/{staffId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public StaffResponse getSelectedStaff(@PathVariable("staffId") String staffId){
+        return staffService.getSelectedStaff(staffId);
+
     }
 }

@@ -1,5 +1,7 @@
 package lk.ijse.greenshadowbackend.service.impl;
 
+import lk.ijse.greenshadowbackend.customObj.StaffResponse;
+import lk.ijse.greenshadowbackend.customObj.impl.StaffErrorResponse;
 import lk.ijse.greenshadowbackend.dao.StaffDao;
 import lk.ijse.greenshadowbackend.dto.impl.StaffDTO;
 import lk.ijse.greenshadowbackend.entity.StaffEntity;
@@ -33,6 +35,16 @@ public class StaffServiceIMPL implements StaffService {
         List<StaffEntity> getAllStaffs = staffDao.findAll();
         return mapping.convertStaffToDTOList(getAllStaffs);
     }
+    @Override
+    public StaffResponse getSelectedStaff(String staffId) {
+        if (staffDao.existsById(staffId)) {
+            StaffEntity staffEntityByStaffId = staffDao.getReferenceById(staffId);
+            return mapping.convertToStaffDTO(staffEntityByStaffId);
+        } else {
+            return new StaffErrorResponse(0, "Staff not Found");
+        }
+    }
+
 
 
 }
