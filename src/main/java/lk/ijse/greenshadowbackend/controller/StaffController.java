@@ -3,6 +3,7 @@ package lk.ijse.greenshadowbackend.controller;
 import lk.ijse.greenshadowbackend.customObj.StaffResponse;
 import lk.ijse.greenshadowbackend.dto.impl.StaffDTO;
 import lk.ijse.greenshadowbackend.exceptions.DataPersistFailedException;
+import lk.ijse.greenshadowbackend.exceptions.StaffNotFound;
 import lk.ijse.greenshadowbackend.service.StaffService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,4 +49,21 @@ public class StaffController {
         return staffService.getSelectedStaff(staffId);
 
     }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PatchMapping(value = "/{staffId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> updateStaff(@PathVariable("staffId") String staffId, @RequestBody StaffDTO staff){
+        try{
+            if (staff == null && (staffId == null || staff.equals(""))){
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            staffService.updateStaff(staffId,staff);
+
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }catch (StaffNotFound e){
+
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+
 }

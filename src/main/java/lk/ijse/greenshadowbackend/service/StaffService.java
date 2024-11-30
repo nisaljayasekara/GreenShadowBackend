@@ -9,5 +9,6 @@ public interface StaffService {
     void saveStaff(StaffDTO staffDTO);
     List<StaffDTO> getAllStaffs();
     StaffResponse getSelectedStaff(String staffId);
+    void updateStaff(String staffId, StaffDTO staffDTO);
 
 }
