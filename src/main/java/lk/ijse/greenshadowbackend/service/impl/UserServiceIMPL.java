@@ -1,5 +1,7 @@
 package lk.ijse.greenshadowbackend.service.impl;
 
+import lk.ijse.greenshadowbackend.customObj.UserResponse;
+import lk.ijse.greenshadowbackend.customObj.impl.UserErrorResponse;
 import lk.ijse.greenshadowbackend.dao.UserDao;
 import lk.ijse.greenshadowbackend.dto.impl.UserDTO;
 import lk.ijse.greenshadowbackend.entity.UserEntity;
@@ -30,6 +32,16 @@ public class UserServiceIMPL implements UserService {
     public List<UserDTO> getAllUsers() {
         List<UserEntity> getAllUsers = userDao.findAll();
         return mapping.convertUserToDTOList(getAllUsers);
+    }
+
+    @Override
+    public UserResponse getSelectedUser(String email) {
+        if (userDao.existsById(email)) {
+            UserEntity userEntityByEmail = userDao.getReferenceById(email);
+            return (UserResponse) mapping.convertToUserDTO(userEntityByEmail);
+        } else {
+            return new UserErrorResponse(0, "User not Found");
+        }
     }
 
 }

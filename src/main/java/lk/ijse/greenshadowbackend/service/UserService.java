@@ -1,5 +1,6 @@
 package lk.ijse.greenshadowbackend.service;
 
+import lk.ijse.greenshadowbackend.customObj.UserResponse;
 import lk.ijse.greenshadowbackend.dto.impl.UserDTO;
 
 import java.util.List;
@@ -7,5 +8,7 @@ import java.util.List;
 public interface UserService {
     void saveUser(UserDTO userDTO);
     List<UserDTO> getAllUsers();
+    UserResponse getSelectedUser(String email);
+
 
 }

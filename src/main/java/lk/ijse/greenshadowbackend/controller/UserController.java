@@ -1,6 +1,9 @@
 package lk.ijse.greenshadowbackend.controller;
 
+import lk.ijse.greenshadowbackend.customObj.UserResponse;
+import lk.ijse.greenshadowbackend.customObj.impl.UserErrorResponse;
 import lk.ijse.greenshadowbackend.dto.impl.UserDTO;
+import lk.ijse.greenshadowbackend.entity.UserEntity;
 import lk.ijse.greenshadowbackend.exceptions.DataPersistFailedException;
 import lk.ijse.greenshadowbackend.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.yaml.snakeyaml.nodes.NodeId.mapping;
 
 @RestController
 @RequestMapping("api/v1/user")
@@ -42,7 +47,15 @@ public class UserController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<UserDTO> getAllUsers(){
         return userService.getAllUsers();
+
     }
+
+    @GetMapping(value = "/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public UserResponse getSelectedUser(@PathVariable("email") String email){
+        return userService.getSelectedUser(email);
+    }
+
+
 
 
 }
