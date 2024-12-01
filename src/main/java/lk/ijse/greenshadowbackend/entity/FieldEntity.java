@@ -36,4 +36,6 @@ public class FieldEntity implements SuperEntity{
     private String fieldImage1;
     @Column(columnDefinition = "LONGTEXT")
     private String fieldImage2;
+
+
 }

@@ -1,5 +1,6 @@
 package lk.ijse.greenshadowbackend.util;
 
+import org.springframework.data.geo.Point;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -55,5 +56,18 @@ public class AppUtil {
         }
         return Base64.getEncoder().encodeToString(fieldImage2.getBytes());
     }
-
+    public static Point toPoint(String pointString) {
+        if (pointString == null || pointString.isEmpty())
+            throw new RuntimeException("Point string cannot be null or empty");
+        String[] parts = pointString.split(",");
+        if (parts.length != 2)
+            throw new RuntimeException("Point string must be in the format 'latitude,longitude'");
+        try {
+            double latitude = Double.parseDouble(parts[0].trim());
+            double longitude = Double.parseDouble(parts[1].trim());
+            return new Point(latitude, longitude);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("Invalid latitude or longitude value", e);
+        }
+    }
 }
