@@ -70,6 +70,20 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    @DeleteMapping(value = "/{email}")
+    public ResponseEntity<Void> deleteUser(@PathVariable("email") String email){
+        try{
+            userService.deleteUser(email);
+
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }catch (UserNotFound e){
+
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }catch (Exception e){
+
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 
 

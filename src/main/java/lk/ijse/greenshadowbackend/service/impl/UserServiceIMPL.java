@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceIMPL implements UserService {
@@ -21,6 +22,7 @@ public class UserServiceIMPL implements UserService {
     private UserDao userDao;
     @Autowired
     private Mapping mapping;
+
 
     @Override
     public void saveUser(UserDTO userDTO) {
@@ -64,5 +66,21 @@ public class UserServiceIMPL implements UserService {
 
         userDao.save(updatedUser);
     }
+    @Override
+    public void deleteUser(String email) {
+        Optional<UserEntity> findId = userDao.findById(email);
+        if (!findId.isPresent()){
+            throw new UserNotFound("User not Found");
+        }else {
+            userDao.deleteById(email);
+        }
+    }
+//    @Override
+//    public UserDetailsService userDetailsService() {
+//        return email ->
+//                userDao.findByEmail(email)
+//                        .orElseThrow(()-> new UserNotFound("User Not found"));
+//    }
+
 
 }
