@@ -5,6 +5,7 @@ import lk.ijse.greenshadowbackend.customObj.impl.UserErrorResponse;
 import lk.ijse.greenshadowbackend.dto.impl.UserDTO;
 import lk.ijse.greenshadowbackend.entity.UserEntity;
 import lk.ijse.greenshadowbackend.exceptions.DataPersistFailedException;
+import lk.ijse.greenshadowbackend.exceptions.UserNotFound;
 import lk.ijse.greenshadowbackend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,23 @@ public class UserController {
     public UserResponse getSelectedUser(@PathVariable("email") String email){
         return userService.getSelectedUser(email);
     }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PatchMapping(value = "/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> updateUser(@PathVariable("email") String email, @RequestBody UserDTO user){
+        try{
+            if (user == null && (email == null || user.equals(""))){
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            userService.updateUser(email,user);
+
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }catch (UserNotFound e){
+
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+
 
 
 
