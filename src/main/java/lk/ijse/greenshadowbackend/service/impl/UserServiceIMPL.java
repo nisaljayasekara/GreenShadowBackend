@@ -10,13 +10,16 @@ import lk.ijse.greenshadowbackend.exceptions.DataPersistFailedException;
 import lk.ijse.greenshadowbackend.exceptions.UserNotFound;
 import lk.ijse.greenshadowbackend.service.UserService;
 import lk.ijse.greenshadowbackend.util.Mapping;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceIMPL implements UserService {
     @Autowired
     private UserDao userDao;
@@ -75,12 +78,10 @@ public class UserServiceIMPL implements UserService {
             userDao.deleteById(email);
         }
     }
-//    @Override
-//    public UserDetailsService userDetailsService() {
-//        return email ->
-//                userDao.findByEmail(email)
-//                        .orElseThrow(()-> new UserNotFound("User Not found"));
-//    }
-
-
+    @Override
+    public UserDetailsService userDetailsService() {
+        return email ->
+                userDao.findByEmail(email)
+                        .orElseThrow(()-> new UserNotFound("User Not found"));
+    }
 }

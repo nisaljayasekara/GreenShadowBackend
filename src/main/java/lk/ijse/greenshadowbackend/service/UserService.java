@@ -2,6 +2,7 @@ package lk.ijse.greenshadowbackend.service;
 
 import lk.ijse.greenshadowbackend.customObj.UserResponse;
 import lk.ijse.greenshadowbackend.dto.impl.UserDTO;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ public interface UserService {
     UserResponse getSelectedUser(String email);
     void updateUser(String email, UserDTO userDTO);
     void deleteUser(String email);
-//    UserDetailsService userDetailsService();
+    UserDetailsService userDetailsService();
 
 
 }
