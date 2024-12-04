@@ -16,6 +16,7 @@ public class AppUtil {
     private static int staffCounter = 0;
 
     private static int fieldCounter = 0;
+    private static int logCounter = 0;
 
     public static synchronized String createVehicleCode(){
         vehicleCounter++;
@@ -69,5 +70,20 @@ public class AppUtil {
         } catch (NumberFormatException e) {
             throw new RuntimeException("Invalid latitude or longitude value", e);
         }
+
+    }  public static String toBase64ObservedImage(MultipartFile observedImage) {
+        try {
+            if (observedImage == null || observedImage.isEmpty()) {
+                return "";
+            }
+            return Base64.getEncoder().encodeToString(observedImage.getBytes());
+        } catch (IOException e) {
+            return "";
+        }
     }
+    public static synchronized String createLogCode(){
+        logCounter++;
+        return String.format("L%04d", logCounter);
+    }
+
 }

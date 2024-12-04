@@ -6,16 +6,15 @@ import lk.ijse.greenshadowbackend.dto.SuperDTO;
 import lk.ijse.greenshadowbackend.enums.Designation;
 import lk.ijse.greenshadowbackend.enums.Gender;
 import lk.ijse.greenshadowbackend.enums.Role;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class StaffDTO implements SuperDTO, StaffResponse {
+@Getter
+@Setter
+public class StaffDTO implements SuperDTO {
     private String staffId;
     private String firstName;
     private String lastName;
